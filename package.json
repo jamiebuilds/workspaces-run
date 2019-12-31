@@ -1,0 +1,87 @@
+{
+  "name": "workspaces-run",
+  "version": "0.0.0",
+  "description": "Run tasks/scripts across Yarn/Lerna/Bolt/etc workspaces.",
+  "main": "dist/lib.js",
+  "bin": {
+    "workspaces-run": "dist/cli.js"
+  },
+  "author": "Jamie Kyle <me@thejameskyle.com>",
+  "repository": "jamiebuilds/workspaces-run",
+  "license": "MIT",
+  "keywords": [
+    "workspaces",
+    "bolt",
+    "yarn",
+    "lerna",
+    "npm",
+    "run",
+    "exec",
+    "eval",
+    "execute",
+    "parallel",
+    "graph",
+    "task",
+    "script"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "check:typescript": "tsc --noEmit",
+    "check:prettier": "prettier --check '**'",
+    "build": "rm -rf dist && tsc",
+    "format": "prettier --write '**'",
+    "test": "ava",
+    "prepublishOnly": "npm run -s build"
+  },
+  "dependencies": {
+    "aggregate-error": "^3.0.1",
+    "chalk": "^3.0.0",
+    "chunkd": "^2.0.1",
+    "cross-spawn": "^7.0.1",
+    "get-workspaces": "^0.5.2",
+    "meow": "^6.0.0",
+    "micromatch": "^4.0.2",
+    "p-limit": "^2.2.1",
+    "physical-cpu-count": "^2.0.0",
+    "redent": "^3.0.0",
+    "semver": "^7.1.1",
+    "signal-exit": "^3.0.2",
+    "task-graph-runner": "^1.0.3",
+    "trim-newlines": "^3.0.0",
+    "wrapline": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.1",
+    "@types/micromatch": "^3.1.1",
+    "@types/semver": "^6.2.0",
+    "@types/signal-exit": "^3.0.0",
+    "ava": "^2.4.0",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register/transpile-only"
+    ]
+  }
+}

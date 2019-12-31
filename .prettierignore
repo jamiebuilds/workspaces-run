@@ -1,0 +1,7 @@
+node_modules
+.*ignore
+package-lock.json
+tsconfig.json
+LICENSE
+dist
+*.sh

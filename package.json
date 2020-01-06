@@ -1,6 +1,6 @@
 {
   "name": "workspaces-run",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Run tasks/scripts across Yarn/Lerna/Bolt/etc workspaces.",
   "main": "dist/lib.js",
   "bin": {

@@ -4,7 +4,7 @@
   "description": "Run tasks/scripts across Yarn/Lerna/Bolt/etc workspaces.",
   "main": "dist/lib.js",
   "bin": {
-    "workspaces-run": "dist/cli.js"
+    "workspaces-run": "bin.js"
   },
   "author": "Jamie Kyle <me@thejameskyle.com>",
   "repository": "jamiebuilds/workspaces-run",
@@ -25,7 +25,8 @@
     "script"
   ],
   "files": [
-    "dist"
+    "dist",
+    "bin.js"
   ],
   "scripts": {
     "check:typescript": "tsc --noEmit",

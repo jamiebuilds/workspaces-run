@@ -10,6 +10,8 @@ import {
 	dependencyTypes,
 } from "../types"
 
+const localPrefixes = ["file:", "workspace:"]
+
 export function arrify<T>(value: undefined | T | T[]): T[] {
 	if (typeof value === "undefined") {
 		return []
@@ -30,6 +32,12 @@ function matchesPatterns(
 	} else {
 		return mm.any(str, patterns)
 	}
+}
+
+function matchesDependency(match: Workspace, depVersion: string): boolean {
+	const versionMatch = semver.satisfies(match.config.version, depVersion)
+	const localDep = localPrefixes.some(prefix => depVersion.startsWith(prefix))
+	return versionMatch || localDep
 }
 
 export async function getFilteredWorkspaces(
@@ -89,7 +97,7 @@ export function getWorkspaceGraph(
 					continue
 				}
 
-				if (!semver.satisfies(match.config.version, depVersion)) {
+				if (!matchesDependency(match, depVersion)) {
 					continue
 				}
 

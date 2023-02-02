@@ -2,6 +2,6 @@
   "name": "b",
   "version": "1.0.0",
   "devDependencies": {
-    "c": "^1.0.0"
+    "c": "file:../c"
   }
 }

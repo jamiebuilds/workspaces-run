@@ -32,6 +32,24 @@ function matchesPatterns(
 	}
 }
 
+let LOCAL_DEPENDENCY_REGEX = /^(?:file|workspace):(.+)$/
+
+function matchesDependency(
+	workspace: Workspace,
+	match: Workspace,
+	depVersion: string,
+	rootDir: string,
+): boolean {
+	let localDepMatch = depVersion.match(LOCAL_DEPENDENCY_REGEX)
+	if (localDepMatch) {
+		let dependencyPath = path.resolve(workspace.dir, localDepMatch[1])
+		let matchPath = path.resolve(rootDir, match.dir)
+		return dependencyPath === matchPath
+	} else {
+		return semver.satisfies(match.config.version, depVersion)
+	}
+}
+
 export async function getFilteredWorkspaces(
 	opts: Options,
 ): Promise<Workspace[]> {
@@ -89,7 +107,7 @@ export function getWorkspaceGraph(
 					continue
 				}
 
-				if (!semver.satisfies(match.config.version, depVersion)) {
+				if (!matchesDependency(workspace, match, depVersion, opts.cwd)) {
 					continue
 				}
 

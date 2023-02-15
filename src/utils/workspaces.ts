@@ -1,13 +1,13 @@
 import getWorkspaces from "get-workspaces"
-import semver from "semver"
-import path from "path"
 import mm from "micromatch"
+import path from "path"
+import semver from "semver"
 import {
-	Workspace,
-	WorkspaceMap,
-	WorkspaceGraph,
-	Options,
 	dependencyTypes,
+	Options,
+	Workspace,
+	WorkspaceGraph,
+	WorkspaceMap,
 } from "../types"
 
 export function arrify<T>(value: undefined | T | T[]): T[] {
@@ -20,7 +20,7 @@ export function arrify<T>(value: undefined | T | T[]): T[] {
 	}
 }
 
-function matchesPatterns(
+export function matchesPatterns(
 	str: string,
 	patterns: string[],
 	emptyShouldMatch: boolean,
@@ -34,7 +34,7 @@ function matchesPatterns(
 
 let LOCAL_DEPENDENCY_REGEX = /^(?:file|workspace):(.+)$/
 
-function matchesDependency(
+export function matchesDependency(
 	workspace: Workspace,
 	match: Workspace,
 	depVersion: string,
